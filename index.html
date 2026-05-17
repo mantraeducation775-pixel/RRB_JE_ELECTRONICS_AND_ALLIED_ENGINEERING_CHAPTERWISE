@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>RRB JE ELECTRONICS AND ALLIED ENGINEERING CHAPTERWISE MOCK TEST (CONDUCTORS)</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
+}
+.header{
+  text-align:center;
+  padding:15px;
+  background:#dc2626;
+  font-size:20px;
+  font-weight:bold;
+}
+.main{
+  display:flex;
+  flex-wrap:wrap;
+  width:95%;
+  margin:auto;
+}
+.left{ flex:2; }
+.right{ flex:1; }
+
+.card{
+  background:#111827;
+  padding:15px;
+  border-radius:12px;
+  margin:10px;
+  box-shadow:0 0 15px rgba(0,0,0,.3);
+}
+
+.option{
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  background:#1f2937;
+  cursor:pointer;
+  transition:.2s;
+}
+.option:hover{ background:#374151; }
+
+.selected{ background:#2563eb !important; }
+.correct{ background:#16a34a !important; }
+.wrong{ background:#dc2626 !important; }
+
+button{
+  padding:10px 14px;
+  margin:5px;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  color:white;
+}
+.primary{ background:#2563eb; }
+.danger{ background:#dc2626; }
+.submit{ background:#16a34a; }
+.info{ background:#7c3aed; }
+.orange{ background:#f59e0b; color:black; }
+.gray{ background:#475569; }
+
+.qbtn{
+  width:40px;
+  height:40px;
+  margin:4px;
+  border:none;
+  border-radius:6px;
+  background:#374151;
+  color:white;
+  cursor:pointer;
+}
+.attempted{ background:#f59e0b !important; }
+
+.rightAnswer{
+  background:#16a34a !important;
+}
+
+.wrongAnswer{
+  background:#dc2626 !important;
+}
+
+.hiddenPanel{
+  display:none;
+}
+
+.timer{
+  color:#facc15;
+  font-size:18px;
+  font-weight:bold;
+}
+
+#infoBox{
+  display:none;
+  margin-top:18px;
+  padding:15px;
+  border-radius:10px;
+  background:#0f172a;
+  border:1px solid #334155;
+  line-height:1.7;
+}
+
+ul{ padding-left:20px; }
+
+@media(max-width:768px){
+  .main{ flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">RRB JE ELECTRONICS AND ALLIED ENGINEERING CHAPTERWISE MOCK TEST (CONDUCTORS)</div>
+
+<div style="text-align:center;padding:10px;">
+⏱ Time Left: <span id="timer" class="timer">30:00</span>
+</div>
+
+<div class="main">
+
+  <div class="left">
+    <div class="card">
+
+      <h3 id="question"></h3>
+      <div id="options"></div>
+
+      <button class="primary" onclick="nextQ()">Save & Next</button>
+      <button class="danger" onclick="clearAns()">Clear</button>
+      <button class="submit" onclick="submitQuiz()">Submit</button>
+      <button class="info" onclick="showQuestionMeaning()">Meaning of Question</button>
+      <button class="orange" onclick="showOptionMeaning()">Option Meaning</button>
+      <button class="gray" onclick="hideInfo()">Hide Meaning</button>
+
+      <div id="infoBox"></div>
+      <div id="result"></div>
+
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="card">
+      <h3>Questions</h3>
+
+      <button class="primary" onclick="togglePanel()">Show / Hide Panel</button>
+
+      <p id="stats">Attempted: 0 / 0</p>
+
+      <div id="panel"></div>
+    </div>
+  </div>
+
+</div>
+
+<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+<audio id="submitSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+
+<script>
+ 
+let questions = [
+{
+q:"Tungsten, due to its high melting point and excellent electrical conductivity, is widely used in high-temperature applications. Which property of tungsten makes it suitable for filaments and electrodes in high-temperature environments?",
+
+opt:[
+"High electrical conductivity and low resistivity",
+"High melting point and resistance to thermal shock",
+"High melting point and low coefficient of expansion",
+"Low melting point and excellent oxidation resistance"
+],
+
+ans:"High melting point and low coefficient of expansion",
+
+explainQ:"Matlab tungsten ka bahut high melting point hota hai aur heat me iska expansion bahut kam hota hai, isliye high temperature electrical components me use hota hai.",
+
+optMeaning:{
+"High electrical conductivity and low resistivity":"Current easily flow karta hai aur resistance kam hota hai",
+"High melting point and resistance to thermal shock":"Bahut heat tolerate karta hai aur sudden temperature change se nahi tootता",
+"High melting point and low coefficient of expansion":"Heat me jaldi melt nahi hota aur expansion bahut kam hota hai",
+"Low melting point and excellent oxidation resistance":"Kam temperature par melt hota hai aur oxidation se bachता hai"
+},
+
+ansExplain:"Correct answer 'High melting point and low coefficient of expansion' hai kyunki tungsten high temperature par stable rehta hai aur filaments/electrodes me use hota hai."
+},
+
+{
+q:"Which of the following materials is typically preferred for electrical conductors due to its high conductivity and resistance to corrosion?",
+
+opt:[
+"Manganin",
+"Gold",
+"Steel",
+"Copper"
+],
+
+ans:"Copper",
+
+explainQ:"Matlab electrical wiring aur conductors ke liye aisa material chahiye jisme conductivity high ho aur corrosion kam ho.",
+
+optMeaning:{
+"Manganin":"Copper-manganese alloy used in resistors",
+"Gold":"Bahut expensive conductive metal",
+"Steel":"Strong metal but conductivity kam",
+"Copper":"High conductivity aur corrosion resistance wala conductor"
+},
+
+ansExplain:"Correct answer 'Copper' hai kyunki copper ki electrical conductivity high hoti hai aur corrosion resistance bhi acchi hoti hai."
+},
+
+{
+q:"Which of the following describes the effect of hardening in conducting materials such as copper and aluminium?",
+
+opt:[
+"It increases ductility and reduces resistance",
+"It reduces electrical conductivity and increases brittleness",
+"It has no effect on the material's electrical properties",
+"It increases hardness and tensile strength, but reduces ductility"
+],
+
+ans:"It reduces electrical conductivity and increases brittleness",
+
+explainQ:"Matlab hardening ke baad copper aur aluminium zyada brittle ho jate hain aur unki conductivity kam ho jati hai.",
+
+optMeaning:{
+"It increases ductility and reduces resistance":"Material zyada flexible ho jata hai aur resistance kam hota hai",
+"It reduces electrical conductivity and increases brittleness":"Conductivity kam hoti hai aur material brittle ban jata hai",
+"It has no effect on the material's electrical properties":"Electrical properties par koi effect nahi hota",
+"It increases hardness and tensile strength, but reduces ductility":"Hardness aur strength badhti hai lekin flexibility kam hoti hai"
+},
+
+ansExplain:"Correct answer 'It reduces electrical conductivity and increases brittleness' hai kyunki hardening ke baad conducting materials brittle ho jate hain aur conductivity decrease ho jati hai."
+},
+
+{
+q:"Manganin is a copper-manganese alloy widely used in precision resistors and temperature-sensitive applications. Which property makes it useful in these applications?",
+
+opt:[
+"High tensile strength and ductility",
+"High electrical conductivity",
+"Low temperature coefficient of resistance",
+"High thermal coefficient of resistance"
+],
+
+ans:"Low temperature coefficient of resistance",
+
+explainQ:"Matlab temperature badalne par bhi manganin ka resistance bahut kam change hota hai.",
+
+optMeaning:{
+"High tensile strength and ductility":"Strong aur flexible material",
+"High electrical conductivity":"Current easily pass hota hai",
+"Low temperature coefficient of resistance":"Temperature change hone par resistance lagbhag same rehta hai",
+"High thermal coefficient of resistance":"Temperature badhne par resistance bahut badhta hai"
+},
+
+ansExplain:"Correct answer 'Low temperature coefficient of resistance' hai kyunki manganin ka resistance temperature change se bahut kam affect hota hai."
+},
+
+{
+q:"Which of the following is a primary characteristic of low resistivity materials used in electrical conductors?",
+
+opt:[
+"High insulation properties and poor conductivity",
+"High thermal resistance and poor conductivity",
+"High cost and low flexibility",
+"High conductivity and low resistivity"
+],
+
+ans:"High conductivity and low resistivity",
+
+explainQ:"Matlab conductor materials me current easily flow hona chahiye aur resistance kam hona chahiye.",
+
+optMeaning:{
+"High insulation properties and poor conductivity":"Current ko rokne wala material",
+"High thermal resistance and poor conductivity":"Heat aur current dono ko resist karta hai",
+"High cost and low flexibility":"Expensive aur kam flexible material",
+"High conductivity and low resistivity":"Current easily flow karta hai aur resistance kam hota hai"
+},
+
+ansExplain:"Correct answer 'High conductivity and low resistivity' hai kyunki electrical conductors me current flow maximum aur resistance minimum hona chahiye."
+},
+ 
+{
+q:"What is the primary effect of the annealing process on conducting materials such as copper and aluminium?",
+
+opt:[
+"It increases tensile strength and hardness",
+"It causes oxidation of the material's surface",
+"It reduces electrical resistance by decreasing the number of dislocations",
+"It increases the material's brittleness"
+],
+
+ans:"It reduces electrical resistance by decreasing the number of dislocations",
+
+explainQ:"Matlab annealing process se metal ke andar ke defects/dislocations kam ho jaate hain jisse current easily flow karta hai.",
+
+optMeaning:{
+"It increases tensile strength and hardness":"Strength aur hardness badhata hai",
+"It causes oxidation of the material's surface":"Surface par oxidation karta hai",
+"It reduces electrical resistance by decreasing the number of dislocations":"Dislocations kam karke resistance kam karta hai",
+"It increases the material's brittleness":"Material ko brittle banata hai"
+},
+
+ansExplain:"Correct answer 'It reduces electrical resistance by decreasing the number of dislocations' hai kyunki annealing electrons ke flow ko easy banata hai aur resistance reduce karta hai."
+},
+
+{
+q:"The most commonly used electrical conductor is−",
+
+opt:[
+"Lead",
+"Copper",
+"Brass",
+"Tin"
+],
+
+ans:"Copper",
+
+explainQ:"Matlab electrical wiring aur conductors me sabse zyada use hone wala material copper hai.",
+
+optMeaning:{
+"Lead":"Heavy soft metal",
+"Copper":"High conductivity wala conductor",
+"Brass":"Copper-zinc alloy",
+"Tin":"Soft coating metal"
+},
+
+ansExplain:"Correct answer 'Copper' hai kyunki copper ki conductivity high hoti hai aur resistivity low hoti hai."
+},
+
+{
+q:"Which material has the highest electrical conductivity?",
+
+opt:[
+"Aluminium",
+"Steel",
+"Silver",
+"Lead"
+],
+
+ans:"Silver",
+
+explainQ:"Matlab sabse easily electric current pass karne wala material silver hai.",
+
+optMeaning:{
+"Aluminium":"Light conducting metal",
+"Steel":"Iron alloy with lower conductivity",
+"Silver":"Sabse high conductivity wala metal",
+"Lead":"Soft heavy metal"
+},
+
+ansExplain:"Correct answer 'Silver' hai kyunki silver me free electrons zyada hote hain isliye conductivity highest hoti hai."
+},
+
+{
+q:"A conductor is said to be perfect if it has ______ electrical conductivity.",
+
+opt:[
+"Zero",
+"Finite",
+"Infinite",
+"Unity"
+],
+
+ans:"Infinite",
+
+explainQ:"Matlab perfect conductor me current flow ke liye resistance nahi hota.",
+
+optMeaning:{
+"Zero":"Bilkul nahi",
+"Finite":"Limited value",
+"Infinite":"Anant value",
+"Unity":"Ek ke equal"
+},
+
+ansExplain:"Correct answer 'Infinite' hai kyunki perfect conductor ki conductivity infinite aur resistance zero hoti hai."
+},
+
+{
+q:"A material is said to have become superconductor when", 
+
+opt:[
+"its resistance becomes negative",
+"its resistance becomes very small",
+"its resistance decreases",
+"its resistance becomes zero"
+],
+
+ans:"its resistance becomes zero",
+
+explainQ:"Matlab superconductor me electrical resistance completely zero ho jata hai.",
+
+optMeaning:{
+"its resistance becomes negative":"Resistance negative ho jata hai",
+"its resistance becomes very small":"Resistance bahut kam ho jata hai",
+"its resistance decreases":"Resistance kam hota hai",
+"its resistance becomes zero":"Resistance completely zero ho jata hai"
+},
+
+ansExplain:"Correct answer 'its resistance becomes zero' hai kyunki superconductivity ki condition me resistance zero hota hai."
+},
+
+{
+q:"Which of the following material has the highest electrical conductivity?",
+
+opt:[
+"Gold",
+"Silver",
+"Copper",
+"Aluminium"
+],
+
+ans:"Silver",
+
+explainQ:"Matlab diye gaye materials me sabse zyada conductivity silver ki hoti hai.",
+
+optMeaning:{
+"Gold":"Expensive conducting metal",
+"Silver":"Highest conductivity wala metal",
+"Copper":"Widely used conductor",
+"Aluminium":"Lightweight conductor"
+},
+
+ansExplain:"Correct answer 'Silver' hai kyunki conductivity order hota hai Silver > Copper > Gold > Aluminium."
+},
+
+{
+q:"5 × 10¹⁶ electrons pass across the section of a conductor in 1 minute 20 sec. The current flowing is :", 
+
+opt:[
+"1 mA",
+"0.1 mA",
+"0.01 mA",
+"10 mA"
+],
+
+ans:"0.1 mA",
+
+explainQ:"Matlab electrons ke flow aur time ki help se current calculate kiya gaya hai using formula Q = ne aur I = Q/t.",
+
+optMeaning:{
+"1 mA":"One milliampere",
+"0.1 mA":"One-tenth milliampere",
+"0.01 mA":"Very small current",
+"10 mA":"Ten milliampere"
+},
+
+ansExplain:"Correct answer '0.1 mA' hai kyunki Q = ne aur I = Q/t formula lagane par current 0.1 mA aata hai."
+},
+
+{
+q:"______ are usually found in the nucleus of an atom",
+
+opt:[
+"Proton and Neutron",
+"Proton and Electron",
+"Electron and Neutron",
+"Only Neutron"
+],
+
+ans:"Proton and Neutron",
+
+explainQ:"Matlab atom ke nucleus ke andar protons aur neutrons present hote hain.",
+
+optMeaning:{
+"Proton and Neutron":"Nucleus ke particles",
+"Proton and Electron":"Electron nucleus ke bahar hota hai",
+"Electron and Neutron":"Electron outer shell me hota hai",
+"Only Neutron":"Sirf neutron nucleus me nahi hota"
+},
+
+ansExplain:"Correct answer 'Proton and Neutron' hai kyunki atom ke nucleus me protons aur neutrons hote hain."
+},
+
+{
+q:"Which of the following is not one of the effects of rise in temperature on resistance?",
+
+opt:[
+"Decrease in the resistance of pure metals",
+"Increase in the resistance of alloys",
+"Decrease in the resistance of electrolytes, insulators, etc.",
+"Increase in the resistance of pure metals"
+],
+
+ans:"Decrease in the resistance of pure metals",
+
+explainQ:"Matlab pure metals me temperature badhne par resistance actually badhta hai, kam nahi hota.",
+
+optMeaning:{
+"Decrease in the resistance of pure metals":"Pure metals ka resistance kam hona",
+"Increase in the resistance of alloys":"Alloys ka resistance badhna",
+"Decrease in the resistance of electrolytes, insulators, etc.":"Electrolytes ka resistance kam hona",
+"Increase in the resistance of pure metals":"Pure metals ka resistance badhna"
+},
+
+ansExplain:"Correct answer 'Decrease in the resistance of pure metals' hai kyunki pure metals ka temperature coefficient positive hota hai aur temperature badhne par resistance increase hota hai."
+},
+{
+q:"The composition of constantan is:",
+
+opt:[
+"Cu = 60% and Ni = 40%",
+"Cu = 43%, Ni = 17% and Mn = 40%",
+"Sn = 23.43%, Cu = 43.67% and Ni = 32.9%",
+"Mn = 65% and Zn = 35%"
+],
+
+ans:"Cu = 60% and Ni = 40%",
+
+explainQ:"Matlab constantan ek copper-nickel alloy hota hai jisme copper 60% aur nickel 40% hota hai.",
+
+optMeaning:{
+"Cu = 60% and Ni = 40%":"Constantan alloy composition",
+"Cu = 43%, Ni = 17% and Mn = 40%":"Manganin type alloy composition",
+"Sn = 23.43%, Cu = 43.67% and Ni = 32.9%":"Mixed alloy composition",
+"Mn = 65% and Zn = 35%":"Manganese-zinc alloy"
+},
+
+ansExplain:"Correct answer 'Cu = 60% and Ni = 40%' hai kyunki constantan copper aur nickel ka alloy hota hai."
+},
+
+{
+q:"Metal film resistors are made by depositing a very thin layer of metal on–",
+
+opt:[
+"Metal rod",
+"Bakelite sheet",
+"Ceramic rod",
+"Metal sheet"
+],
+
+ans:"Bakelite sheet",
+
+explainQ:"Matlab metal film resistor me ek patli metal layer bakelite sheet par deposit ki jati hai.",
+
+optMeaning:{
+"Metal rod":"Metal ka cylindrical rod",
+"Bakelite sheet":"Insulating sheet used in electronics",
+"Ceramic rod":"Ceramic material rod",
+"Metal sheet":"Patli metal plate"
+},
+
+ansExplain:"Correct answer 'Bakelite sheet' hai kyunki metal film resistors me thin metal layer bakelite sheet par deposit hoti hai."
+},
+
+{
+q:"In the superconducting state, the flux lines of a magnetic field are ejected out of the superconductor as per-", 
+
+opt:[
+"Curie effect",
+"Faraday’s effect",
+"Maxwell’s effect",
+"Meissner effect"
+],
+
+ans:"Meissner effect",
+
+explainQ:"Matlab superconductors magnetic field ko apne andar enter nahi hone dete.",
+
+optMeaning:{
+"Curie effect":"Magnetism related effect",
+"Faraday’s effect":"Electromagnetic induction effect",
+"Maxwell’s effect":"Electromagnetic theory relation",
+"Meissner effect":"Magnetic flux expulsion effect"
+},
+
+ansExplain:"Correct answer 'Meissner effect' hai kyunki superconductors magnetic flux lines ko bahar eject kar dete hain."
+},
+
+{
+q:"The usual matter of soldering is",
+
+opt:[
+"Steel alloy",
+"White metal",
+"Alloy of lead and tin",
+"Alloy of copper and zinc"
+],
+
+ans:"Alloy of lead and tin",
+
+explainQ:"Matlab soldering me generally lead aur tin ka alloy use hota hai.",
+
+optMeaning:{
+"Steel alloy":"Iron-based alloy",
+"White metal":"Soft white alloy",
+"Alloy of lead and tin":"Common solder material",
+"Alloy of copper and zinc":"Brass alloy"
+},
+
+ansExplain:"Correct answer 'Alloy of lead and tin' hai kyunki soldering ke liye lead-tin alloy commonly use hota hai."
+},
+
+{
+q:"Which of the following lists platinum, silver, aluminium and copper in increasing order of resistivity?",
+
+opt:[
+"Platinum, Aluminium, Copper, Silver",
+"Silver, Copper, Platinum, Aluminium",
+"Copper, Silver, Aluminum, Platinum",
+"Silver, Copper, Aluminium, Platinum"
+],
+
+ans:"Silver, Copper, Aluminium, Platinum",
+
+explainQ:"Matlab resistivity sabse kam silver ki hoti hai aur sabse zyada platinum ki.",
+
+optMeaning:{
+"Platinum, Aluminium, Copper, Silver":"Wrong resistivity order",
+"Silver, Copper, Platinum, Aluminium":"Incorrect order",
+"Copper, Silver, Aluminum, Platinum":"Incorrect sequence",
+"Silver, Copper, Aluminium, Platinum":"Correct increasing order"
+},
+
+ansExplain:"Correct answer 'Silver, Copper, Aluminium, Platinum' hai kyunki resistivity increasing order isi sequence me hota hai."
+},
+
+{
+q:"Silver tungsten contact material has _____ thermal and electrical conductivity.",
+
+opt:[
+"zero",
+"low",
+"medium",
+"high"
+],
+
+ans:"high",
+
+explainQ:"Matlab silver tungsten material heat aur electricity dono ko bahut achhe se conduct karta hai.",
+
+optMeaning:{
+"zero":"Bilkul nahi",
+"low":"Kam conductivity",
+"medium":"Average conductivity",
+"high":"Bahut zyada conductivity"
+},
+
+ansExplain:"Correct answer 'high' hai kyunki silver tungsten ki thermal aur electrical conductivity high hoti hai."
+},
+
+{
+q:"The correct sequence of increasing order of electrical resistivity of the given material is-", 
+
+opt:[
+"Diamond, Silicon, Gold, Doped germanium",
+"Gold, Silicon, Doped germanium, Diamond",
+"Gold, Doped germanium, Silicon, Diamond",
+"Gold Diamond, Doped germanium, Silicon"
+],
+
+ans:"Gold, Doped germanium, Silicon, Diamond",
+
+explainQ:"Matlab gold ki resistivity sabse kam aur diamond ki sabse zyada hoti hai.",
+
+optMeaning:{
+"Diamond, Silicon, Gold, Doped germanium":"Wrong order",
+"Gold, Silicon, Doped germanium, Diamond":"Incorrect sequence",
+"Gold, Doped germanium, Silicon, Diamond":"Correct increasing order",
+"Gold Diamond, Doped germanium, Silicon":"Incorrect arrangement"
+},
+
+ansExplain:"Correct answer 'Gold, Doped germanium, Silicon, Diamond' hai kyunki resistivity increasing order isi tarah hota hai."
+},
+
+{
+q:"The best definition of a superconductor is:",
+
+opt:[
+"It is a material showing perfect conductivity and Meissner effect below a critical temperature",
+"It is conductor having zero resistance",
+"It is a perfect conductor with highest diamagnetic susceptibility",
+"It is a perfect conductor but becomes resistive when the current density through it exceeds a critical value"
+],
+
+ans:"It is a material showing perfect conductivity and Meissner effect below a critical temperature",
+
+explainQ:"Matlab superconductor wo material hota hai jisme zero resistance aur Meissner effect dono hote hain critical temperature ke niche.",
+
+optMeaning:{
+"It is a material showing perfect conductivity and Meissner effect below a critical temperature":"Complete superconductivity definition",
+"It is conductor having zero resistance":"Only zero resistance batata hai",
+"It is a perfect conductor with highest diamagnetic susceptibility":"Diamagnetism par focus karta hai",
+"It is a perfect conductor but becomes resistive when the current density through it exceeds a critical value":"Critical current condition explain karta hai"
+},
+
+ansExplain:"Correct answer 'It is a material showing perfect conductivity and Meissner effect below a critical temperature' hai kyunki superconductor ki proper definition me Meissner effect aur zero resistance dono included hote hain."
+},
+
+{
+q:"_____ is a weak electron-electron bond pair mediated by a phonon interaction.",
+
+opt:[
+"Electron pair",
+"Cooper pair",
+"Ion pair",
+"Fermions pair"
+],
+
+ans:"Cooper pair",
+
+explainQ:"Matlab superconductivity me do electrons phonon interaction ki wajah se pair bana lete hain jise Cooper pair kehte hain.",
+
+optMeaning:{
+"Electron pair":"Normal electron pair",
+"Cooper pair":"Superconductivity me banne wala electron pair",
+"Ion pair":"Ion ka pair",
+"Fermions pair":"Fermion particles ka pair"
+},
+
+ansExplain:"Correct answer 'Cooper pair' hai kyunki superconductivity me weak electron-electron bonding phonon interaction ke through hoti hai."
+},
+
+{
+q:"Pure Metals generally have:",
+
+opt:[
+"High Conductivity and Low temperature coefficient",
+"High Conductivity and High temperature coefficient",
+"Low Conductivity and zero temperature coefficient",
+"Low Conductivity and High temperature coefficient"
+],
+
+ans:"High Conductivity and High temperature coefficient",
+
+explainQ:"Matlab pure metals current ko easily conduct karte hain aur temperature badhne par resistance bhi badhta hai.",
+
+optMeaning:{
+"High Conductivity and Low temperature coefficient":"Current easily flow kare aur temp effect kam ho",
+"High Conductivity and High temperature coefficient":"Conductivity high aur temperature coefficient positive",
+"Low Conductivity and zero temperature coefficient":"Poor conductor without temp effect",
+"Low Conductivity and High temperature coefficient":"Poor conductor with high temp effect"
+},
+
+ansExplain:"Correct answer 'High Conductivity and High temperature coefficient' hai kyunki pure metals ki conductivity high aur temperature coefficient positive hoti hai."
+},
+
+{
+q:"Which of the following is not one of the effects of rise in temperature on resistance?",
+
+opt:[
+"Decrease in the resistance of pure metals",
+"Increase in the resistance of alloys",
+"Decrease in the resistance of electrolytes, insulators, etc.",
+"Increase in the resistance of pure metals"
+],
+
+ans:"Decrease in the resistance of pure metals",
+
+explainQ:"Matlab pure metals me temperature badhne par resistance kam nahi balki badhta hai.",
+
+optMeaning:{
+"Decrease in the resistance of pure metals":"Resistance kam hona",
+"Increase in the resistance of alloys":"Alloys ka resistance badhna",
+"Decrease in the resistance of electrolytes, insulators, etc.":"Electrolytes ka resistance kam hona",
+"Increase in the resistance of pure metals":"Pure metals ka resistance badhna"
+},
+
+ansExplain:"Correct answer 'Decrease in the resistance of pure metals' hai kyunki pure metals ka resistance temperature increase hone par badhta hai."
+},
+
+{
+q:"Charge velocity is defined as the:",
+
+opt:[
+"Speed with which the effect of EMF is experienced at all parts of the conductor resulting in the flow of current",
+"Electrons moving at the Fermi speed",
+"Speed with which charge drifts in a conductor",
+"Holes moving at the Fermi speed"
+],
+
+ans:"Speed with which charge drifts in a conductor",
+
+explainQ:"Matlab conductor me charges jis speed se move karte hain use charge velocity kehte hain.",
+
+optMeaning:{
+"Speed with which the effect of EMF is experienced at all parts of the conductor resulting in the flow of current":"Signal propagation speed",
+"Electrons moving at the Fermi speed":"Fermi level electron speed",
+"Speed with which charge drifts in a conductor":"Drift velocity of charges",
+"Holes moving at the Fermi speed":"Hole movement speed"
+},
+
+ansExplain:"Correct answer 'Speed with which charge drifts in a conductor' hai kyunki charge velocity ko drift velocity bhi kehte hain."
+},
+
+{
+q:"Which of the following is true for resistance of a conductor?",
+
+opt:[
+"It is directly proportional to its length",
+"It is directly proportional to the area of cross section of the conductor",
+"It is independent of nature of the material",
+"It is independent of temperature of conductor"
+],
+
+ans:"It is directly proportional to its length",
+
+explainQ:"Matlab conductor jitna lamba hoga utni hi zyada resistance hogi.",
+
+optMeaning:{
+"It is directly proportional to its length":"Length badhne par resistance badhta hai",
+"It is directly proportional to the area of cross section of the conductor":"Area badhne par resistance badhta hai",
+"It is independent of nature of the material":"Material par depend nahi karta",
+"It is independent of temperature of conductor":"Temperature se effect nahi hota"
+},
+
+ansExplain:"Correct answer 'It is directly proportional to its length' hai kyunki resistance formula R = ρL/A hota hai."
+},
+
+{
+q:"Materials in which large number of free electrons are available in outermost orbit are called:",
+
+opt:[
+"Semiconductors",
+"Conductors",
+"Insulators",
+"Magnetic materials"
+],
+
+ans:"Conductors",
+
+explainQ:"Matlab jin materials me free electrons zyada hote hain unme current easily flow karta hai.",
+
+optMeaning:{
+"Semiconductors":"Moderate conductivity materials",
+"Conductors":"High free electron materials",
+"Insulators":"Current ko rokne wale materials",
+"Magnetic materials":"Magnetism show karne wale materials"
+},
+
+ansExplain:"Correct answer 'Conductors' hai kyunki conductors me free electrons ki sankhya bahut zyada hoti hai."
+},
+
+{
+q:"All conducting materials have a resistivity of less than",
+
+opt:[
+"10⁻³ Ωm",
+"10⁻² Ωm",
+"10⁻⁶ Ωm",
+"10³ Ωm"
+],
+
+ans:"10⁻³ Ωm",
+
+explainQ:"Matlab conducting materials ki resistivity bahut kam hoti hai jisse current easily flow karta hai.",
+
+optMeaning:{
+"10⁻³ Ωm":"Very low resistivity",
+"10⁻² Ωm":"Low resistivity",
+"10⁻⁶ Ωm":"Extremely low resistivity",
+"10³ Ωm":"Very high resistivity"
+},
+
+ansExplain:"Correct answer '10⁻³ Ωm' hai kyunki conductors ki resistivity generally isse kam hoti hai."
+},
+
+{
+q:"Which of the following has the largest number of free electrons?",
+
+opt:[
+"Intrinsic semiconductor",
+"Conductor",
+"Extrinsic semiconductor",
+"Insulator"
+],
+
+ans:"Conductor",
+
+explainQ:"Matlab conductors me free electrons sabse zyada available hote hain.",
+
+optMeaning:{
+"Intrinsic semiconductor":"Pure semiconductor",
+"Conductor":"Current easily conduct karne wala material",
+"Extrinsic semiconductor":"Doped semiconductor",
+"Insulator":"Current ko rokne wala material"
+},
+
+ansExplain:"Correct answer 'Conductor' hai kyunki conductors me free electrons ki quantity sabse zyada hoti hai."
+},
+{
+q:"For a copper wire with free electron concentration 8.4×10²⁸/m³ and resistivity 2.5×10⁻⁴ Ω-m, determine the mobility of electrons.",
+
+opt:[
+"3.567×10⁻³ m²/V-sec",
+"4.67×10⁻² m²/V-sec",
+"2.173×10⁻⁵ m²/V-sec",
+"1.542×10⁻⁴ m²/V-sec"
+],
+
+ans:"3.567×10⁻³ m²/V-sec",
+
+explainQ:"Matlab electron mobility calculate karne ke liye formula µ = 1/neρ use hota hai.",
+
+optMeaning:{
+"3.567×10⁻³ m²/V-sec":"Correct electron mobility value",
+"4.67×10⁻² m²/V-sec":"Higher incorrect mobility",
+"2.173×10⁻⁵ m²/V-sec":"Very low mobility",
+"1.542×10⁻⁴ m²/V-sec":"Incorrect calculated value"
+},
+
+ansExplain:"Correct answer '3.567×10⁻³ m²/V-sec' hai kyunki mobility formula µ = 1/neρ lagane par ye value milti hai."
+},
+
+{
+q:"A conductor material has free electron density 10²⁵ electrons/m³ and drift velocity 1.4×10⁻³ m/s. If cross-sectional area is 1 cm², calculate the magnitude of current.",
+
+opt:[
+"0.224 A",
+"0.2 A",
+"0.25 A",
+"0.1 A"
+],
+
+ans:"0.224 A",
+
+explainQ:"Matlab current calculate karne ke liye formula I = neAVd use hota hai.",
+
+optMeaning:{
+"0.224 A":"Correct current value",
+"0.2 A":"Approximate lower value",
+"0.25 A":"Approximate higher value",
+"0.1 A":"Very low current value"
+},
+
+ansExplain:"Correct answer '0.224 A' hai kyunki I = neAVd formula apply karne par current 0.224 A aata hai."
+},
+
+{
+q:"Which of the following lists platinum, silver, aluminium and copper in increasing order of resistivity?",
+
+opt:[
+"Platinum, Aluminium, Copper, Silver",
+"Silver, Copper, Platinum, Aluminium",
+"Copper, Silver, Aluminium, Platinum",
+"Silver, Copper, Aluminium, Platinum"
+],
+
+ans:"Silver, Copper, Aluminium, Platinum",
+
+explainQ:"Matlab resistivity sabse kam silver ki aur sabse zyada platinum ki hoti hai.",
+
+optMeaning:{
+"Platinum, Aluminium, Copper, Silver":"Wrong order",
+"Silver, Copper, Platinum, Aluminium":"Incorrect sequence",
+"Copper, Silver, Aluminium, Platinum":"Wrong arrangement",
+"Silver, Copper, Aluminium, Platinum":"Correct increasing order"
+},
+
+ansExplain:"Correct answer 'Silver, Copper, Aluminium, Platinum' hai kyunki resistivity increasing order isi sequence me hota hai."
+},
+
+{
+q:"Superconductors nowadays found applications in various fields because they:",
+
+opt:[
+"generate regions free from magnetic field",
+"manufacture bubble memories",
+"generate electrostatic field",
+"generate very strong magnetic field"
+],
+
+ans:"generate very strong magnetic field",
+
+explainQ:"Matlab superconductors bahut powerful magnetic field generate kar sakte hain.",
+
+optMeaning:{
+"generate regions free from magnetic field":"Magnetic free region create karna",
+"manufacture bubble memories":"Bubble memory use",
+"generate electrostatic field":"Static electric field banana",
+"generate very strong magnetic field":"Powerful magnetic field create karna"
+},
+
+ansExplain:"Correct answer 'generate very strong magnetic field' hai kyunki superconductors MRI aur NMR jaise applications me strong magnetic field generate karte hain."
+},
+
+{
+q:"The magnitude of critical density in a superconductor depends on:",
+
+opt:[
+"Both temperature and magnetic field strength",
+"temperature for some time and then on magnetic field strength",
+"temperature",
+"magnetic field strength"
+],
+
+ans:"Both temperature and magnetic field strength",
+
+explainQ:"Matlab superconductors ki critical density temperature aur magnetic field dono par depend karti hai.",
+
+optMeaning:{
+"Both temperature and magnetic field strength":"Temperature aur magnetic field dono effect karte hain",
+"temperature for some time and then on magnetic field strength":"Sequential dependence",
+"temperature":"Sirf temperature effect",
+"magnetic field strength":"Sirf magnetic field effect"
+},
+
+ansExplain:"Correct answer 'Both temperature and magnetic field strength' hai kyunki superconductors ki critical density dono factors par depend karti hai."
+},
+
+{
+q:"A material is said to have become superconductor when",
+
+opt:[
+"its resistance becomes negative",
+"its resistance becomes very small",
+"its resistance decreases",
+"its resistance becomes zero"
+],
+
+ans:"its resistance becomes zero",
+
+explainQ:"Matlab superconducting state me material ka resistance completely zero ho jata hai.",
+
+optMeaning:{
+"its resistance becomes negative":"Negative resistance",
+"its resistance becomes very small":"Very low resistance",
+"its resistance decreases":"Resistance reduce hota hai",
+"its resistance becomes zero":"Resistance completely khatam ho jata hai"
+},
+
+ansExplain:"Correct answer 'its resistance becomes zero' hai kyunki superconductors me electrical resistance zero hota hai."
+},
+
+{
+q:"The transition temperature of superconductivity material titanium is:",
+
+opt:[
+"1.17 K",
+"14 K",
+"9.2 K",
+"0.49 K"
+],
+
+ans:"0.49 K",
+
+explainQ:"Matlab titanium 0.49 Kelvin se niche temperature par superconducting state me chala jata hai.",
+
+optMeaning:{
+"1.17 K":"Incorrect transition temperature",
+"14 K":"Higher temperature",
+"9.2 K":"Transition temperature of another material",
+"0.49 K":"Correct critical temperature of titanium"
+},
+
+ansExplain:"Correct answer '0.49 K' hai kyunki titanium ka superconducting transition temperature 0.49 Kelvin hota hai."
+},
+
+{
+q:"The current carrying capacity of aluminium is what percent of the carrying capacity of copper?",
+
+opt:[
+"15%",
+"30%",
+"75%",
+"25%"
+],
+
+ans:"75%",
+
+explainQ:"Matlab aluminium ki current carrying capacity copper ki comparison me lagbhag 75% hoti hai.",
+
+optMeaning:{
+"15%":"Very low percentage",
+"30%":"Low percentage",
+"75%":"Correct current carrying capacity ratio",
+"25%":"Incorrect lower value"
+},
+
+ansExplain:"Correct answer '75%' hai kyunki aluminium ki current carrying capacity copper ke comparison me approximately 75% hoti hai."
+},
+
+{
+q:"If a piece of metal is made to have a temperature gradient between its two ends, an emf is observed between those ends. This effect is known as:",
+
+opt:[
+"Thomson effect",
+"Seebeck effect",
+"Peltier effect",
+"Thevenin effect"
+],
+
+ans:"Thomson effect",
+
+explainQ:"Matlab temperature difference ki wajah se conductor me emf generate hota hai.",
+
+optMeaning:{
+"Thomson effect":"Temperature gradient se emf generation",
+"Seebeck effect":"Thermocouple voltage effect",
+"Peltier effect":"Heating/cooling effect at junction",
+"Thevenin effect":"Circuit theorem"
+},
+
+ansExplain:"Correct answer 'Thomson effect' hai kyunki temperature gradient ke kaaran conductor me emf generate hota hai."
+},
+
+{
+q:"When a material becomes superconducting then its resistivity is:",
+
+opt:[
+"Very low",
+"Zero",
+"Approximate 10% of normal value",
+"Approximate 20% of normal value"
+],
+
+ans:"Zero",
+
+explainQ:"Matlab superconducting state me resistivity bilkul zero ho jati hai.",
+
+optMeaning:{
+"Very low":"Bahut kam resistivity",
+"Zero":"No resistivity",
+"Approximate 10% of normal value":"10% resistivity",
+"Approximate 20% of normal value":"20% resistivity"
+},
+
+ansExplain:"Correct answer 'Zero' hai kyunki superconductors ki resistivity completely zero hoti hai."
+},
+
+{
+q:"The material of wires used for making standard resistances is usually:",
+
+opt:[
+"Manganin",
+"Phosphor Bronze",
+"Nichrome",
+"Copper"
+],
+
+ans:"Manganin",
+
+explainQ:"Matlab standard resistance coils banane ke liye manganin alloy use hota hai.",
+
+optMeaning:{
+"Manganin":"Copper-nickel-manganese alloy",
+"Phosphor Bronze":"Bronze alloy",
+"Nichrome":"Nickel-chromium heating alloy",
+"Copper":"High conductivity conductor"
+},
+
+ansExplain:"Correct answer 'Manganin' hai kyunki manganin ki resistivity high aur temperature coefficient low hoti hai."
+},
+
+];
+
+
+
+
+let current=0;
+let answers={};
+let time=1800;
+let interval;
+let submitted=false;
+
+function playSound(id){
+  document.getElementById(id).play();
+}
+
+function updateStats(){
+  let attempted = Object.keys(answers).length;
+  document.getElementById("stats").innerText =
+    `Attempted: ${attempted} / ${questions.length}`;
+}
+
+function loadQ(){
+  let q=questions[current];
+  document.getElementById("question").innerText="Q"+(current+1)+". "+q.q;
+
+  let optDiv=document.getElementById("options");
+  optDiv.innerHTML="";
+
+  q.opt.forEach(o=>{
+    let d=document.createElement("div");
+    d.className="option";
+    d.innerText=o;
+
+    if(answers[current]==o) d.classList.add("selected");
+
+    d.onclick=()=>{
+      if(submitted) return;
+
+      playSound("clickSound");
+      answers[current]=o;
+
+      document.querySelectorAll(".option")
+      .forEach(x=>x.classList.remove("selected"));
+
+      d.classList.add("selected");
+      document.getElementById("btn"+current).classList.add("attempted");
+
+      updateStats();
+    };
+
+    optDiv.appendChild(d);
+  });
+
+  if(submitted) review();
+}
+
+function showQuestionMeaning(){
+  let q=questions[current];
+  let box=document.getElementById("infoBox");
+  box.style.display="block";
+  box.innerHTML=`
+    <h3 style="color:#facc15;">Meaning of Question</h3>
+    <p>${q.explainQ}</p>
+  `;
+}
+
+function showOptionMeaning(){
+  let q=questions[current];
+  let box=document.getElementById("infoBox");
+  box.style.display="block";
+
+  box.innerHTML=`
+    <h3 style="color:#facc15;">Option Meaning</h3>
+    <ul>
+      ${q.opt.map(o=>`<li><b>${o}</b> → ${q.optMeaning[o]}</li>`).join("")}
+    </ul>
+  `;
+}
+
+function hideInfo(){
+  document.getElementById("infoBox").style.display="none";
+}
+
+function togglePanel(){
+  document.getElementById("panel").classList.toggle("hiddenPanel");
+}
+
+function review(){
+  let q=questions[current];
+
+  document.querySelectorAll(".option").forEach(opt=>{
+    opt.classList.remove("selected");
+
+    if(opt.innerText===q.ans){
+      opt.classList.add("correct");
+    }
+
+    if(
+      answers[current] &&
+      answers[current]!==q.ans &&
+      opt.innerText===answers[current]
+    ){
+      opt.classList.add("wrong");
+    }
+  });
+
+  let box=document.getElementById("infoBox");
+  box.style.display="block";
+  box.innerHTML=`
+    <h3 style="color:#22c55e;">Correct Answer</h3>
+    <p><b>Answer:</b> ${q.ans}</p>
+    <p>${q.ansExplain}</p>
+  `;
+}
+
+function createPanel(){
+  let p=document.getElementById("panel");
+
+  questions.forEach((_,i)=>{
+    let b=document.createElement("button");
+    b.innerText=i+1;
+    b.className="qbtn";
+    b.id="btn"+i;
+
+    b.onclick=()=>{
+      current=i;
+      loadQ();
+    };
+
+    p.appendChild(b);
+  });
+
+  updateStats();
+}
+
+function nextQ(){
+  if(current<questions.length-1){
+    current++;
+    loadQ();
+  }else{
+    submitQuiz();
+  }
+}
+
+function clearAns(){
+  if(!submitted){
+    delete answers[current];
+    document.getElementById("btn"+current).classList.remove("attempted");
+    updateStats();
+    loadQ();
+  }
+}
+
+function submitQuiz(){
+  submitted=true;
+  playSound("submitSound");
+  clearInterval(interval);
+
+  let c=0,w=0;
+
+  questions.forEach((q,i)=>{
+    let btn=document.getElementById("btn"+i);
+
+    if(answers[i]===q.ans){
+      c++;
+      btn.classList.add("rightAnswer");
+    }
+    else if(answers[i]){
+      w++;
+      btn.classList.add("wrongAnswer");
+    }
+  });
+
+  let score=c-(w*0.25);
+  let percent=(score/questions.length)*100;
+
+  document.getElementById("result").innerHTML=`
+    <h3>Score: ${score}</h3>
+    <p>Correct: ${c} | Wrong: ${w}</p>
+    <p>Percent: ${percent.toFixed(2)}%</p>
+  `;
+
+  loadQ();
+}
+
+function timerRun(){
+  interval=setInterval(()=>{
+    time--;
+
+    let m=Math.floor(time/60);
+    let s=time%60;
+
+    document.getElementById("timer").innerText=
+      `${m}:${s<10?"0":s}`;
+
+    if(time<=0) submitQuiz();
+  },1000);
+}
+
+createPanel();
+loadQ();
+timerRun();
+
+</script>
+</body>
+</html>
